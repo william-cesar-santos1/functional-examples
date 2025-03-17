@@ -10,7 +10,13 @@ public class RemocaoItemLista {
         List<Pessoa> pessoas = pessoas();
         // Filtre as pessoas com menos de 4 caracteres no primeiro nome
         // e as remova da lista.
-//        pessoas.removeIf()
+        pessoas.removeIf(pessoa -> {
+            var primeiroNome = pessoa.getName().split(" ")[0];
+            return primeiroNome.length() < 4;
+        });
+
+        pessoas.forEach(System.out::println);
+        pessoas.forEach(pessoa -> System.out.println(pessoa.getName()));
     }
 
     public static List<Pessoa> pessoas() {
