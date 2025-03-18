@@ -2,6 +2,8 @@ package br.ada.desenvolva1321.exercises;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RemocaoItemLista {
@@ -15,8 +17,28 @@ public class RemocaoItemLista {
             return primeiroNome.length() < 4;
         });
 
+        //Ordena a lista por nome
+//        pessoas.sort((pessoa1, pessoa2) -> pessoa2.getName().compareTo(pessoa1.getName()));
+        // Dado que a tenho a lista de pessoas, ordene por data de nascimento, na forma crescente
+        pessoas.sort((pessoa1, pessoa2) -> {
+            var result = pessoa1.getDateBirth().compareTo(pessoa2.getDateBirth());
+            if (result == 0) {
+                // Se result == 0, significa com a data de nascimento é a mesma.
+                // Uma segunda comparação por nome será feita
+                result = pessoa1.getName().compareTo(pessoa2.getName());
+            }
+            return result;
+        });
+
+        // Não tenham muito foco no comparador abaixo
+//        pessoas.sort(Comparator.comparing(Pessoa::getName).reversed());
+//        pessoas.sort(
+//                Comparator.comparing(Pessoa::getDateBirth)
+//                        .thenComparing(Pessoa::getName)
+//        );
+
         pessoas.forEach(System.out::println);
-        pessoas.forEach(pessoa -> System.out.println(pessoa.getName()));
+//        pessoas.forEach(pessoa -> System.out.println(pessoa.getName()));
     }
 
     public static List<Pessoa> pessoas() {
@@ -31,6 +53,7 @@ public class RemocaoItemLista {
         pessoas.add(new Pessoa(8L, "Henry Baker", "0000000000", LocalDate.of(1982, 8, 7)));
         pessoas.add(new Pessoa(9L, "Isabella Green", "9999999999", LocalDate.of(1997, 4, 12)));
         pessoas.add(new Pessoa(10L, "Jack Taylor", "8888888888", LocalDate.of(1978, 6, 23)));
+        pessoas.add(new Pessoa(11L, "Alice Cooper", "156143541695", LocalDate.of(1978, 6, 23)));
         return pessoas;
     }
 
