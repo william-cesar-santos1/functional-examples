@@ -20,22 +20,22 @@ public class RemocaoItemLista {
         //Ordena a lista por nome
 //        pessoas.sort((pessoa1, pessoa2) -> pessoa2.getName().compareTo(pessoa1.getName()));
         // Dado que a tenho a lista de pessoas, ordene por data de nascimento, na forma crescente
-        pessoas.sort((pessoa1, pessoa2) -> {
-            var result = pessoa1.getDateBirth().compareTo(pessoa2.getDateBirth());
-            if (result == 0) {
-                // Se result == 0, significa com a data de nascimento é a mesma.
-                // Uma segunda comparação por nome será feita
-                result = pessoa1.getName().compareTo(pessoa2.getName());
-            }
-            return result;
-        });
+//        pessoas.sort((pessoa1, pessoa2) -> {
+//            var result = pessoa1.getDateBirth().compareTo(pessoa2.getDateBirth());
+//            if (result == 0) {
+//                // Se result == 0, significa com a data de nascimento é a mesma.
+//                // Uma segunda comparação por nome será feita
+//                result = pessoa1.getName().compareTo(pessoa2.getName());
+//            }
+//            return result;
+//        });
 
         // Não tenham muito foco no comparador abaixo
 //        pessoas.sort(Comparator.comparing(Pessoa::getName).reversed());
-//        pessoas.sort(
-//                Comparator.comparing(Pessoa::getDateBirth)
-//                        .thenComparing(Pessoa::getName)
-//        );
+        pessoas.sort(
+                Comparator.comparing(Pessoa::getDateBirth)
+                        .thenComparing(Pessoa::getName)
+        );
 
         pessoas.forEach(System.out::println);
 //        pessoas.forEach(pessoa -> System.out.println(pessoa.getName()));
