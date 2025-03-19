@@ -4,6 +4,7 @@ import br.ada.desenvolva1321.exercises.Pessoa;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,14 +27,22 @@ public class MainStream {
         // Dado que possuo a lista de pessoas calcule a soma total das idades
         // idade = ano atual - ano de nascimento
         // reduce = idade1, idade2 -> idade1 + idade2
+        var currentYear = LocalDate.now().getYear();
         var somaIdade = pessoas().stream()
-                .map(calculeAIdadeDaPessoa)
-                .reduce(someAsIdades)
+                .map(pessoa -> currentYear - pessoa.getDateBirth().getYear())
+                .reduce((idade1, idade2) -> idade1 + idade2)
                 .orElse(0);
-        System.out.println("A soma de todas as idades é: "+somaIdade);
+        System.out.println("A soma de todas as idades é: " + somaIdade);
 
         // Dado que possuo a lista de pessoas, encontre a pessoa mais nova na lista
+        var pessoaMaisNova = pessoas().stream()
+                .max(Comparator.comparing(Pessoa::getDateBirth))
+                .orElse(null);
+        System.out.println(pessoaMaisNova);
+
         // Dado que possuo a lista de pessoas, encontre a pessoa mais idosa da lista
+
+
         // Dado que possuo a lista de pessoas, conte quantas letras cada nome possui
         // Exemplo de resultado: Alice Johnson - 12, Bob Smith - 8
     }
