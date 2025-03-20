@@ -41,10 +41,22 @@ public class MainStream {
         System.out.println(pessoaMaisNova);
 
         // Dado que possuo a lista de pessoas, encontre a pessoa mais idosa da lista
-
+        var pessoaMaisIdosa = pessoas().stream()
+                .min(Comparator.comparing(Pessoa::getDateBirth))
+                .orElse(null);
+        System.out.println(pessoaMaisIdosa);
 
         // Dado que possuo a lista de pessoas, conte quantas letras cada nome possui
-        // Exemplo de resultado: Alice Johnson - 12, Bob Smith - 8
+        // Exemplo de resultado: Alice Johnson - 13, Bob Smith - 9
+        pessoas().stream()
+                .map(pessoa -> pessoa.getName() + " - " + pessoa.getName().replace(" ", "").length())//pessoa -> conte aqui
+                .forEach(System.out::println);
+
+        pessoas().stream()
+                .collect(Collectors.toMap(
+                        Pessoa::getName,
+                        pessoa -> pessoa.getName().length()
+                )).forEach((name, size) -> System.out.println(name + " - " + size));
     }
 
     public static List<Pessoa> pessoas() {
